@@ -1,0 +1,465 @@
+{
+  "entities": {
+    "ApprovedTeacher": {
+      "title": "ApprovedTeacher",
+      "description": "Approved faculty email authorized to manage students, batches, timetables, marks, fees, and lectures.",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Faculty email address"
+        },
+        "name": {
+          "type": "string",
+          "description": "Faculty full name"
+        },
+        "subject": {
+          "type": "string",
+          "description": "Teaching subject specialization"
+        },
+        "qualification": {
+          "type": "string",
+          "description": "Academic qualifications and degrees"
+        },
+        "age": {
+          "type": "number",
+          "description": "Faculty age"
+        },
+        "experienceYears": {
+          "type": "number",
+          "description": "Years of teaching experience"
+        },
+        "bio": {
+          "type": "string",
+          "description": "Teaching philosophy and profile summary"
+        },
+        "profileCompleted": {
+          "type": "boolean",
+          "description": "Whether 2-step profile onboarding has been submitted"
+        },
+        "addedAt": {
+          "type": "string",
+          "description": "Timestamp string or ISO date"
+        },
+        "isOwner": {
+          "type": "boolean",
+          "description": "Super admin owner flag"
+        }
+      },
+      "required": ["email", "name"]
+    },
+    "Batch": {
+      "title": "Batch",
+      "description": "Academic coaching batch in Bhavani Science Classes",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique batch slug"
+        },
+        "name": {
+          "type": "string",
+          "description": "Batch display name"
+        },
+        "stream": {
+          "type": "string",
+          "enum": ["JEE", "NEET", "MHT-CET", "XI-XII Science"]
+        },
+        "academicYear": {
+          "type": "string",
+          "description": "Academic year e.g. 2025-26"
+        },
+        "timing": {
+          "type": "string",
+          "description": "Class timing window"
+        },
+        "room": {
+          "type": "string",
+          "description": "Classroom or lab location"
+        }
+      },
+      "required": ["id", "name", "stream"]
+    },
+    "Student": {
+      "title": "Student",
+      "description": "Enrolled student record in Bhavani Science Classes",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Student document ID"
+        },
+        "uid": {
+          "type": "string",
+          "description": "Firebase Auth UID of the student"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Student Google email"
+        },
+        "name": {
+          "type": "string",
+          "description": "Student full name"
+        },
+        "batch": {
+          "type": "string",
+          "description": "Student batch name or identifier"
+        },
+        "batchId": {
+          "type": "string",
+          "description": "Assigned batch identifier"
+        },
+        "batchName": {
+          "type": "string",
+          "description": "Assigned batch title"
+        },
+        "class": {
+          "type": "string",
+          "description": "Class standard e.g. Class 11, Class 12, Repeater"
+        },
+        "academicYear": {
+          "type": "string",
+          "description": "Current academic year e.g. 2025-26"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["active", "inactive"],
+          "description": "Enrollment status (active or inactive)"
+        },
+        "parentName": {
+          "type": "string",
+          "description": "Parent or guardian name"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Student registered 10-digit mobile number"
+        },
+        "parentPhone": {
+          "type": "string",
+          "description": "Parent registered phone number"
+        },
+        "rollNo": {
+          "type": "string",
+          "description": "Admission roll number e.g. BSC-2024-JEE-042"
+        },
+        "age": {
+          "type": "number",
+          "description": "Student age in years"
+        },
+        "dob": {
+          "type": "string",
+          "description": "Date of birth"
+        },
+        "targetExam": {
+          "type": "string",
+          "description": "Target exam e.g. IIT-JEE, NEET, MHT-CET, Board Exams"
+        },
+        "schoolCollege": {
+          "type": "string",
+          "description": "School or Junior College name"
+        },
+        "addressArea": {
+          "type": "string",
+          "description": "Residential locality / area"
+        },
+        "profileCompleted": {
+          "type": "boolean",
+          "description": "Whether 2-step profile onboarding has been submitted"
+        },
+        "active": {
+          "type": "boolean",
+          "description": "Enrollment status flag"
+        }
+      },
+      "required": ["name", "email", "batch", "class", "academicYear", "status", "parentName", "phone"]
+    },
+    "FeeRecord": {
+      "title": "FeeRecord",
+      "description": "Fee ledger, installments, receipts, and UPI payment status for a student",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fee record ID matching student ID"
+        },
+        "studentId": {
+          "type": "string",
+          "description": "Associated student ID"
+        },
+        "studentRoll": {
+          "type": "string",
+          "description": "Student roll number"
+        },
+        "studentName": {
+          "type": "string",
+          "description": "Student full name"
+        },
+        "batchId": {
+          "type": "string",
+          "description": "Student batch ID"
+        },
+        "totalFee": {
+          "type": "number",
+          "description": "Total academic fee in INR"
+        },
+        "paidFee": {
+          "type": "number",
+          "description": "Total fee paid in INR"
+        },
+        "pendingFee": {
+          "type": "number",
+          "description": "Pending fee in INR"
+        },
+        "dueDate": {
+          "type": "string",
+          "description": "Upcoming installment due date"
+        },
+        "currentInstallmentTitle": {
+          "type": "string",
+          "description": "Title of current installment"
+        },
+        "currentInstallmentNo": {
+          "type": "number",
+          "description": "Current installment sequence number"
+        },
+        "totalInstallments": {
+          "type": "number",
+          "description": "Total installment count"
+        },
+        "installmentAmount": {
+          "type": "number",
+          "description": "Amount due for current installment in INR"
+        }
+      },
+      "required": ["studentId", "totalFee", "paidFee", "pendingFee"]
+    },
+    "TestResult": {
+      "title": "TestResult",
+      "description": "Test examination marks, rank, and percentile for a student",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Result document ID"
+        },
+        "studentId": {
+          "type": "string",
+          "description": "Associated student ID"
+        },
+        "studentRoll": {
+          "type": "string",
+          "description": "Student roll number"
+        },
+        "studentName": {
+          "type": "string",
+          "description": "Student name"
+        },
+        "batchId": {
+          "type": "string",
+          "description": "Student batch ID"
+        },
+        "testTitle": {
+          "type": "string",
+          "description": "Title of the test"
+        },
+        "date": {
+          "type": "string",
+          "description": "Date test was conducted"
+        },
+        "totalMarks": {
+          "type": "number",
+          "description": "Scored marks"
+        },
+        "maxMarks": {
+          "type": "number",
+          "description": "Maximum marks possible"
+        },
+        "percentile": {
+          "type": "number",
+          "description": "Scored percentile"
+        },
+        "rank": {
+          "type": "number",
+          "description": "Batch rank"
+        },
+        "totalStudents": {
+          "type": "number",
+          "description": "Batch student count"
+        }
+      },
+      "required": ["studentId", "testTitle", "totalMarks", "maxMarks"]
+    },
+    "Lecture": {
+      "title": "Lecture",
+      "description": "Curated video lecture with YouTube unlisted link for a specific batch and subject",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Lecture document ID"
+        },
+        "title": {
+          "type": "string",
+          "description": "Lecture title"
+        },
+        "subject": {
+          "type": "string",
+          "description": "Subject e.g. Physics, Chemistry, Mathematics, Biology"
+        },
+        "chapter": {
+          "type": "string",
+          "description": "Chapter name"
+        },
+        "batchId": {
+          "type": "string",
+          "description": "Assigned batch ID or 'all'"
+        },
+        "batchName": {
+          "type": "string",
+          "description": "Assigned batch display name"
+        },
+        "videoUrl": {
+          "type": "string",
+          "description": "YouTube unlisted video link"
+        },
+        "duration": {
+          "type": "string",
+          "description": "Lecture duration"
+        },
+        "teacherName": {
+          "type": "string",
+          "description": "Instructor faculty name"
+        },
+        "dateAdded": {
+          "type": "string",
+          "description": "Date lecture was added"
+        }
+      },
+      "required": ["title", "subject", "chapter", "batchId", "videoUrl"]
+    },
+    "Timetable": {
+      "title": "Timetable",
+      "description": "Weekly schedule slot for a batch",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Timetable document ID"
+        },
+        "batchId": {
+          "type": "string",
+          "description": "Batch ID"
+        },
+        "dayOfWeek": {
+          "type": "string",
+          "enum": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+        },
+        "subject": {
+          "type": "string",
+          "description": "Subject"
+        },
+        "topic": {
+          "type": "string",
+          "description": "Scheduled topic"
+        },
+        "time": {
+          "type": "string",
+          "description": "Time slot e.g. 07:30 AM - 09:30 AM"
+        },
+        "teacher": {
+          "type": "string",
+          "description": "Assigned teacher"
+        },
+        "room": {
+          "type": "string",
+          "description": "Room number"
+        }
+      },
+      "required": ["batchId", "dayOfWeek", "subject", "time"]
+    },
+    "Notice": {
+      "title": "Notice",
+      "description": "Institute notice or holiday announcement",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Notice document ID"
+        },
+        "title": {
+          "type": "string",
+          "description": "Notice title"
+        },
+        "content": {
+          "type": "string",
+          "description": "Notice body text"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["holiday", "exam_alert", "general", "schedule_change"]
+        },
+        "batchId": {
+          "type": "string",
+          "description": "Target batch ID or 'all'"
+        },
+        "date": {
+          "type": "string",
+          "description": "Date posted"
+        },
+        "isHoliday": {
+          "type": "boolean",
+          "description": "Holiday flag"
+        },
+        "priority": {
+          "type": "string",
+          "enum": ["high", "normal"]
+        },
+        "postedBy": {
+          "type": "string",
+          "description": "Teacher/Admin name"
+        }
+      },
+      "required": ["title", "content", "batchId", "date"]
+    }
+  },
+  "firestore": {
+    "/teachers/{teacherEmail}": {
+      "schema": { "$ref": "#/entities/ApprovedTeacher" },
+      "description": "Approved teacher accounts managed by super admin owner"
+    },
+    "/approved_teachers/{teacherEmail}": {
+      "schema": { "$ref": "#/entities/ApprovedTeacher" },
+      "description": "Allowlisted faculty emails with administrative rights"
+    },
+    "/batches/{batchId}": {
+      "schema": { "$ref": "#/entities/Batch" },
+      "description": "Coaching batches and class streams"
+    },
+    "/students/{studentId}": {
+      "schema": { "$ref": "#/entities/Student" },
+      "description": "Enrolled students"
+    },
+    "/fee_records/{feeId}": {
+      "schema": { "$ref": "#/entities/FeeRecord" },
+      "description": "Student fee records, pending balances, receipts"
+    },
+    "/test_results/{resultId}": {
+      "schema": { "$ref": "#/entities/TestResult" },
+      "description": "Examination results and marks"
+    },
+    "/lectures/{lectureId}": {
+      "schema": { "$ref": "#/entities/Lecture" },
+      "description": "Curated video lectures with YouTube unlisted embeds"
+    },
+    "/timetables/{timetableId}": {
+      "schema": { "$ref": "#/entities/Timetable" },
+      "description": "Weekly timetable entries"
+    },
+    "/notices/{noticeId}": {
+      "schema": { "$ref": "#/entities/Notice" },
+      "description": "Announcements, circulars, and holiday notifications"
+    }
+  }
+}

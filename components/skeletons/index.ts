@@ -1,0 +1,9 @@
+export { Skeleton } from './SkeletonBase';
+export { StudentDashboardSkeleton } from './StudentDashboardSkeleton';
+export { TimetableSkeleton } from './TimetableSkeleton';
+export { LecturesSkeleton } from './LecturesSkeleton';
+export { TestResultsSkeleton } from './TestResultsSkeleton';
+export { FeePaymentSkeleton } from './FeePaymentSkeleton';
+export { TeacherHubSkeleton } from './TeacherHubSkeleton';
+export { AppHeaderSkeleton } from './AppHeaderSkeleton';
+export { ProfileSkeleton } from './ProfileSkeleton';

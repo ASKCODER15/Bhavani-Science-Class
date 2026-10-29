@@ -1,0 +1,6 @@
+{
+  "name": "Bhavani Science Classes",
+  "description": "Official portal for Bhavani Science Classes (Virar West) - Student dashboard, timetable, marks, fee receipts, UPI payment, and video lectures.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
